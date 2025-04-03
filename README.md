@@ -1,0 +1,3 @@
+# Algo Notes
+
+Using Python.
