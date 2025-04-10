@@ -17,7 +17,7 @@ class ArrayHashTable:
         # modify
         if self.containsKey(key):
             i = self.map[key]
-            self.arr[i].value
+            self.arr[i].value = value # I should check full code coverage
             return 
         # add new node
         node = Node(key, value)
@@ -42,6 +42,8 @@ class ArrayHashTable:
         return key in self.map
     
     def randomKey(self):
+        if len(self.arr) == 0:
+            return None
         index = random.randint(0, len(self.arr) - 1)
         return self.arr[index].key
     
@@ -71,4 +73,4 @@ def test_randomKey():
 
 # test_put()
 # test_remove()
-test_randomKey()
+# test_randomKey()
