@@ -31,7 +31,7 @@ def levelOrderTraversal2(root: TreeNode):
     depth = 1 # record the current depth, root node is level 1
     
     while q:
-        sz = len(q)
+        sz = len(q) # how many nodes in the current level
         for i in range(sz): # we exhaust all the nodes in the queue in each level
             cur = q.popleft()
             print(f"depth = {depth}, val = {cur.val}")
@@ -53,18 +53,18 @@ def levelOrderTraversal3(root: TreeNode):
     if root is None:
         return 
     q = deque() 
-    q.append(State(root, 1)) # the path weight sum of the root node is 1
+    q.append(State(root, root.val)) # the path weight sum of the root node is 1
     
     while q:
         cur = q.popleft() 
         # visit the cur node, and know its path weight sum
-        print(f"depth: {cur.depth}, val = {cur.val}")
+        print(f"depth: {cur.depth}, val = {cur.node.val}")
 
         # add the left and right child node of cur to the queue
         if cur.node.left is not None:
-            q.append(State(cur.node.left, cur.depth + 1))
+            q.append(State(cur.node.left, cur.depth + cur.node.left.val))
         if cur.node.right is not None:
-            q.append(State(cur.node.right, cur.depth + 1))
+            q.append(State(cur.node.right, cur.depth + cur.node.right.val))
 
 
 
@@ -81,4 +81,5 @@ root.left.left = TreeNode(4)
 root.right.left = TreeNode(5)
 root.right.right = TreeNode(6)
 # levelOrderTraversal1(root)
-levelOrderTraversal2(root)
+# levelOrderTraversal2(root)
+levelOrderTraversal3(root)
