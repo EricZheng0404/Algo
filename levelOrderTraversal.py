@@ -56,7 +56,7 @@ def levelOrderTraversal3(root: TreeNode):
     q.append(State(root, root.val)) # the path weight sum of the root node is 1
     
     while q:
-        cur = q.popleft() 
+        cur = q.popleft() # cur is a State object
         # visit the cur node, and know its path weight sum
         print(f"depth: {cur.depth}, val = {cur.node.val}")
 
