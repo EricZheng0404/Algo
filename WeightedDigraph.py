@@ -11,7 +11,9 @@ class WeightedDigraph:
             return f"To: {self.to}, weight: {self.weight}"
     
     def __init__(self, n: int):
-        self.graph: List[List[WeightedDigraph.Edge]] = [[] for _ in range(n)] # typing and also initialization
+        # typing (on the left) and also initialization (on the right)
+        self.graph: List[List[WeightedDigraph.Edge]] = [[] for _ in range(n)] 
+
 
     def __repr__(self) -> str:
         result = []
@@ -36,10 +38,15 @@ class WeightedDigraph:
                 return
     
     def hasEdge(self, from_: int, to: int):
-        for edge in self.graph[from_]:
-            if edge.to == to:
-                return True
-        return False
+        try:
+            for edge in self.graph[from_]:
+                if edge.to == to:
+                    return True
+            return False
+        except IndexError as e:
+            print(f"Index out of range: {e}")
+        except ValueError as e:
+            print(f"Value error: {e}")
     
     def weight(self, from_: int, to: int) -> int:
         vertex = self.graph[from_]
@@ -51,6 +58,24 @@ class WeightedDigraph:
     # return all neighbors of a vertex
     def neighbors(self, v: int):
         return self.graph[v]
+    
+    def size(self):
+        return len(self.graph)
+    
+    def _in_range(self, vertex):
+        length = len(self.graph)
+        if vertex >= length:
+            raise IndexError("Index out of range")
+        
+def traverse(graph: WeightedDigraph, s, visited):
+    if s < 0 or s >= graph.size():
+        return
+    if (visited[s]):
+        return
+    visited[s] = True
+    print(f"visit: {s}")
+    for e in graph.neighbors(s):
+        traverse(graph, e.to, visited)
 
 if __name__ == "__main__":
     """
@@ -64,13 +89,18 @@ if __name__ == "__main__":
     graph.addEdge(2, 0, 3)
     graph.addEdge(2, 1, 4)
 
-    print(graph.hasEdge(0, 1))  # true
-    print(graph.hasEdge(1, 0))  # false
+    # print(graph.hasEdge(0, 1))  # true
+    # print(graph.hasEdge(1, 0))  # false
+    # print(graph.hasEdge(6, 10))
 
-    for edge in graph.neighbors(2):
-        print(f"{2} -> {edge.to}, weight: {edge.weight}")
-    # 2 -> 0, weight: 3
-    # 2 -> 1, weight: 4
+    # for edge in graph.neighbors(2):
+    #     print(f"{2} -> {edge.to}, weight: {edge.weight}")
+    # # 2 -> 0, weight: 3
+    # # 2 -> 1, weight: 4
 
-    graph.removeEdge(0, 1)
-    print(graph.hasEdge(0, 1))  # false
+    # graph.removeEdge(0, 1)
+    # print(graph.hasEdge(0, 1))  # false
+    visited = [False] * graph.size()
+
+    traverse(graph, 0, visited)
+    
