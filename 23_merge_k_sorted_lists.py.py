@@ -1,4 +1,7 @@
-# Definition for singly-linked list.
+"""
+We have n linked lists. Link them back to one single linkedlist from the least
+to the greatest.
+"""
 import heapq
 
 class ListNode(object):
@@ -30,7 +33,7 @@ class Solution(object):
                 heapq.heappush(pq, (head.val, i, head)) # Insert a tuple 
         
         while pq:
-            value, i, head = heapq.heappop(pq)
+            value, i, head = heapq.heappop(pq) # Don't forget to pass pq into heap.heappop()
             p.next = head
             if head.next is not None:
                 heapq.heappush(pq, (head.next.val, i, head.next))

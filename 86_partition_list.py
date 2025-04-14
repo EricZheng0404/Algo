@@ -4,6 +4,9 @@ class ListNode(object):
         self.val = val
         self.next = next
 
+# We have a linked list and an x as inputs.
+# Put all the ListNodes less than x before x, and put all the ListNodes greater
+# than or equal to x to the right of x
 class Solution(object):
     def partition(self, head, x):
         """
@@ -17,7 +20,7 @@ class Solution(object):
         p = head
         
         while p:
-            value = p.val
+            value = p.val # create new node rather than directly link p1.next to p to break cycle
             if value < x:
                 p1.next = ListNode(value)
                 p1 = p1.next
@@ -25,7 +28,7 @@ class Solution(object):
                 p2.next = ListNode(value)
                 p2 = p2.next
             p = p.next
-            
+
         p1.next = dummy2.next
         return dummy1.next
     
