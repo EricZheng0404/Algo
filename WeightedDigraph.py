@@ -1,7 +1,8 @@
 from typing import List
 
-# Adjacency List Implementation
+# Adjacency List Implementation: Directed Weight Graph
 class WeightedDigraph:
+    # A class nested under WeightDigraph
     class Edge:
         def __init__(self, to: int, weight: int):
             self.to = to
@@ -66,28 +67,65 @@ class WeightedDigraph:
         length = len(self.graph)
         if vertex >= length:
             raise IndexError("Index out of range")
-        
+
+
+# DFS traversal
 def traverse(graph: WeightedDigraph, s, visited):
-    if s < 0 or s >= graph.size():
+    # This is a defensive check, validating the vertex s is within valid bound
+    if s < 0 or s >= graph.size(): 
         return
-    if (visited[s]):
+    # This is the base case. If s is visited already, we should immediately return.
+    if (visited[s]): 
         return
     visited[s] = True
-    print(f"visit: {s}")
-    for e in graph.neighbors(s):
-        traverse(graph, e.to, visited)
+    # This is pre-order traversal
+    print(f"visit: {s}") 
+    for e in graph.neighbors(s): # neighbors() function return bunch of edges
+        traverse(graph, e.to, visited) # We continue with the children(!!)
+
+# Find the path to the target
+# Store all the possible paths to the destination
+def findTarget(graph: WeightedDigraph, src, dest, on_path, path, all_paths):
+    if src < 0 or src >= graph.size():
+        return 
+    # print(on_path)
+    if on_path[src]:
+        return 
+    # Pre-order position
+    on_path[src] = True
+    path.append(src)
+    if src == dest:
+        all_paths.append(path)
+    for e in graph.neighbors(src):
+        findTarget(graph, e.to, dest, on_path, path, all_paths)
+    path.pop()
+    on_path[src] = False
+    
+
 
 if __name__ == "__main__":
     """
     0: 1(1)
     1: 2(2)
     2: 0(3), 1(4)
+            0 
+           / \
+          1   4
+         / \
+        2   5
+       / \
+      0   1
     """
-    graph = WeightedDigraph(3)
+    # We have 6 nodes: 0, 1, 2, 3, 4, 5
+    graph = WeightedDigraph(6)
     graph.addEdge(0, 1, 1)
+    graph.addEdge(0, 4, 2)
     graph.addEdge(1, 2, 2)
+    graph.addEdge(1, 5, 10)
     graph.addEdge(2, 0, 3)
     graph.addEdge(2, 1, 4)
+    graph.addEdge(4, 5, 2)
+    
 
     # print(graph.hasEdge(0, 1))  # true
     # print(graph.hasEdge(1, 0))  # false
@@ -100,7 +138,14 @@ if __name__ == "__main__":
 
     # graph.removeEdge(0, 1)
     # print(graph.hasEdge(0, 1))  # false
-    visited = [False] * graph.size()
 
-    traverse(graph, 0, visited)
+    # DFS traverse the tree
+    visited = [False] * graph.size()
+    # traverse(graph, 0, visited)
     
+    # Find the target and the path
+    on_path = [False] * graph.size()
+    path = []
+    all_paths = []
+    findTarget(graph, 0, 5, on_path, path, all_paths)
+    print(all_paths)
