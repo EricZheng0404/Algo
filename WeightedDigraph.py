@@ -95,7 +95,9 @@ def findTarget(graph: WeightedDigraph, src, dest, on_path, path, all_paths):
     on_path[src] = True
     path.append(src)
     if src == dest:
-        all_paths.append(path)
+        # [:] creates a copy of the list to avoid appending a reference to the original path
+        # Without [:], changes to path would affect the paths we already added
+        all_paths.append(path[:])
     for e in graph.neighbors(src):
         findTarget(graph, e.to, dest, on_path, path, all_paths)
     path.pop()
