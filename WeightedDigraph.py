@@ -1,5 +1,5 @@
 from typing import List
-
+from collections import deque
 # Adjacency List Implementation: Directed Weight Graph
 class WeightedDigraph:
     # A class nested under WeightDigraph
@@ -56,9 +56,9 @@ class WeightedDigraph:
                 return edge.weight
         raise ValueError("No such edge") 
     
-    # return all neighbors of a vertex
+    # return all neighbors of a edges
     def neighbors(self, v: int):
-        return self.graph[v]
+        return self.graph[v] 
     
     def size(self):
         return len(self.graph)
@@ -70,6 +70,7 @@ class WeightedDigraph:
 
 
 # DFS traversal
+# Traversing all nodes
 def traverse(graph: WeightedDigraph, s, visited):
     # This is a defensive check, validating the vertex s is within valid bound
     if s < 0 or s >= graph.size(): 
@@ -83,6 +84,7 @@ def traverse(graph: WeightedDigraph, s, visited):
     for e in graph.neighbors(s): # neighbors() function return bunch of edges
         traverse(graph, e.to, visited) # We continue with the children(!!)
 
+# Traversing all paths
 # Find the path to the target
 # Store all the possible paths to the destination
 def findTarget(graph: WeightedDigraph, src, dest, on_path, path, all_paths):
@@ -92,18 +94,73 @@ def findTarget(graph: WeightedDigraph, src, dest, on_path, path, all_paths):
     if on_path[src]:
         return 
     # Pre-order position
-    on_path[src] = True
+    on_path[src] = True # To guarantee there's no cyle in one path
     path.append(src)
     if src == dest:
-        # [:] creates a copy of the list to avoid appending a reference to the original path
-        # Without [:], changes to path would affect the paths we already added
+        # When we backtrack and pop elements from the path, this shallow copy ensures that path added won't change
         all_paths.append(path[:])
     for e in graph.neighbors(src):
         findTarget(graph, e.to, dest, on_path, path, all_paths)
     path.pop()
     on_path[src] = False
-    
 
+# Implmentation 1: BFS the tree, we print out the node val when we visit it
+# It doesn't record the steps
+def dfs1(graph: WeightedDigraph, s: int):
+    visited = [False] * graph.size()
+    q = deque([s])
+    visited[s] = True
+    while q:
+        cur = q.popleft()
+        print(cur)
+        for v in graph.neighbors(cur): 
+            if visited[v.to] == False:
+                q.append(v.to)
+                visited[v.to] = True
+
+# Implementation 2: BFS tree
+# It reflect the steps
+def dfs2(graph: WeightedDigraph, s: int):
+    visited = [False] * graph.size()
+    q = deque([s])
+    visited[s] = True
+    step = 0
+
+    while q:
+        sz = len(q)
+        for _ in range(sz):
+            cur = q.popleft()
+            print(f"step: {step}, val is {cur}") # I set this to s before
+            for v in graph.neighbors(cur): # I set this to s before
+                if not visited[v.to]:
+                    q.append(v.to)
+                    visited[v.to] = True # I set this False before
+        step += 1
+
+# Implementation 3: BFS tree
+# It reflects cumulative weight
+def dfs3(graph: WeightedDigraph, s: int):
+    class State:
+        def __init__(self, node, weight):
+            self.node = node
+            self.weight = weight # I should
+
+    visited = [False] * graph.size()
+    q = deque()
+    weight = 0
+    q.append(State(s, weight))
+    visited[s] = True 
+
+    while q: 
+        sz = len(q)
+        for _ in range(sz):
+            cur = q.popleft() # This is a state
+            print(f"Node is {cur.node}, weight is {cur.weight}")
+            for v in graph.neighbors(cur.node):
+                if not visited[v.to]:
+                    q.append(State(v.to, cur.weight + v.weight))
+                    visited[v.to] = True
+    
 
 if __name__ == "__main__":
     """
@@ -113,7 +170,7 @@ if __name__ == "__main__":
             0 
            / \
           1   4
-         / \
+         / \ /
         2   5
        / \
       0   1
@@ -142,12 +199,21 @@ if __name__ == "__main__":
     # print(graph.hasEdge(0, 1))  # false
 
     # DFS traverse the tree
-    visited = [False] * graph.size()
+    # visited = [False] * graph.size()
     # traverse(graph, 0, visited)
     
     # Find the target and the path
-    on_path = [False] * graph.size()
-    path = []
-    all_paths = []
-    findTarget(graph, 0, 5, on_path, path, all_paths)
-    print(all_paths)
+    # on_path = [False] * graph.size()
+    # path = []
+    # all_paths = []
+    # findTarget(graph, 0, 5, on_path, path, all_paths)
+    # print(all_paths)
+
+    # BFS1
+    # dfs1(graph, 0) # 0, 1, 4, 2, 5
+
+    # BFS2
+    # dfs2(graph, 0)
+
+    # BFS3
+    dfs3(graph, 0)
