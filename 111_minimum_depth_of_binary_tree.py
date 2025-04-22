@@ -59,6 +59,18 @@ class Solution2:
                 if cur.right is not None:
                     q.append(cur.right)
             depth += 1
+
+def maxDepth(root: TreeNode) -> int:
+    if root is None:
+        return 0
+    # Recursively calculate the maximum depth of the left and right subtrees
+    leftMax = maxDepth(root.left)
+    rightMax = maxDepth(root.right)
+    # The maximum depth of the entire tree is the
+    # maximum depth of the left and right subtrees
+    res = max(leftMax, rightMax) + 1
+
+    return res
 # root 1:
 #       1
 #     /   \
@@ -67,7 +79,7 @@ class Solution2:
 # 4      5   6
 
 # root 2:
-#    t
+#    1
 
 # root 3: 
 #       1
@@ -107,3 +119,4 @@ if __name__ == "__main__":
     print("sol minDepth root3:", sol.minDepth(root3))
     print("sol2 minDepth root3:", sol2.minDepth(root3))
     
+    print("Max depth:", maxDepth(root3))

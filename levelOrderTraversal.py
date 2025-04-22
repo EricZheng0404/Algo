@@ -1,5 +1,5 @@
 from collections import deque
-
+from typing import List
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -43,6 +43,8 @@ def levelOrderTraversal2(root: TreeNode):
                 q.append(cur.right)
         depth += 1
 
+
+
 # Implementation 3: allowing each node to maintain its own path weight sum
 class State:
     def __init__(self, node, depth) -> None:
@@ -66,7 +68,26 @@ def levelOrderTraversal3(root: TreeNode):
         if cur.node.right is not None:
             q.append(State(cur.node.right, cur.depth + cur.node.right.val))
 
-
+# Level order traversal, return a list of list of all elements in each level
+# Format: [[1], [2, 3], [4, 5, 6]]
+def levelOrder(root: TreeNode) -> List[List[int]]:
+    if not root:
+        return []
+    q = deque()
+    q.append(root)
+    res = []
+    while q: # In every while loop, we exhaust all the nodes in the current level
+        sz = len(q)
+        tmp = [] # Create a list for the current level
+        for _ in range(sz):
+            cur = q.popleft()
+            tmp.append(cur.val) # Add the val of the node in the current level to the temp list
+            if cur.left:
+                q.append(cur.left) # Add the node in the next level on the left tree
+            if cur.right:
+                q.append(cur.right) # Add the node in the next level on the right tree
+        res.append(tmp) # When the current level is done, we append the list to the result
+    return res
 
 # The constructed binary tree looks like this:
 #     1
@@ -81,5 +102,5 @@ root.left.left = TreeNode(4)
 root.right.left = TreeNode(5)
 root.right.right = TreeNode(6)
 # levelOrderTraversal1(root)
-# levelOrderTraversal2(root)
-levelOrderTraversal3(root)
+levelOrderTraversal2(root)
+# levelOrderTraversal3(root)
