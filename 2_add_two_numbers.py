@@ -16,7 +16,7 @@ class Solution(object):
         p = dummy
         p1, p2 = l1, l2
         carry = 0
-        while p1 or p2 or carry > 0:
+        while p1 or p2 or carry > 0: # If we still have a carry, we need to continue creating new ListNode for it
             val = carry
             if p1:
                 val += p1.val

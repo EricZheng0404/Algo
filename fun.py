@@ -1,17 +1,10 @@
-class ListNode(object):
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+nums1 = [1, 2, 3, 0, 0, 0]
+print(nums1)
+pointer = nums1
+result = [1, 2, 3, 4, 5, 6]
 
-# Create a linked list: 0 -> 1 -> 2 -> 3 -> 4
-head = ListNode(0)
-curr = head
-for i in range(1, 5):
-    curr.next = ListNode(i)
-    curr = curr.next
+# This modifies nums1 IN-PLACE
+nums1[:] = result
 
-p1 = head
-for _ in range(2):
-    print(p1.val)
-    p1 = p1.next
-print(p1.val)
+print("nums1: ", nums1)  # Output: [1, 2, 3, 4, 5, 6]
+print("pointer: ", pointer)
