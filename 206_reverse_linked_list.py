@@ -12,7 +12,7 @@ class ListNode:
 
 node0 = ListNode(0)
 node0.next = ListNode(1)
-node0.next.next = ListNode(2)
+# node0.next.next = ListNode(2)
 
 cur = node0
 while cur:
@@ -25,12 +25,14 @@ def reverse(head: ListNode):
     cur = head
     prev = None
     while cur:
-        next = cur.next
+        temp = cur.next
         cur.next = prev 
-        next.next = cur 
-        prev = cur
-        cur = next 
-    return cur
+        prev = cur 
+        cur = temp 
+    return prev
 
 newHead = reverse(node0)
-print(newHead.val)
+cur = newHead
+while cur:
+    print(cur.val)
+    cur = cur.next

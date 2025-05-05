@@ -1,6 +1,7 @@
 # We have a linked list and an x as inputs.
 # Put all the ListNodes less than x before x, and put all the ListNodes greater
 # than or equal to x to the right of x
+# I should preserve the original order.
 
 class ListNode(object):
     def __init__(self, val=0, next=None):
@@ -33,7 +34,7 @@ class Solution(object):
         p1.next = dummy2.next
         return dummy1.next
     
-    # Implementation2: Disconnect
+    # Implementation2: Disconnect the link between the new and old lists
     def partition2(self, head, x):
         dummy1 = ListNode(-1)
         dummy2 = ListNode(-1)
