@@ -1,5 +1,6 @@
 ##############################################################
 # nSum Problem.
+# Could be applied to 2Sum, 3Sum, 4Sum, etc.
 ##############################################################
 
 """
@@ -38,7 +39,17 @@ def nSumTarget(nums, n, start, target):
                     hi -= 1
         return res
     else:
-        # When n > 2, recursively calculate the result of (n-1)Sum
+        # When n > 2, recursively calculate the result of (n-1)Sum. So start is at least 2
         for i in range(start, sz):
-            
-            
+            # Skip the duplicate elements
+            if i > start and nums[i] == nums[i - 1]:
+                continue
+            subs = nSumTarget(nums, n - 1, i + 1, target - nums[i])
+            for sub in subs:
+                sub.append(nums[i])
+                res.append(sub)
+        return res
+
+if __name__ ==  "__main__":
+    print(nSumTarget([0, 1, 3], 2, 0, 4))
+    print(nSumTarget([1,0,-1,0,-2,2], 4, 0, 0))
