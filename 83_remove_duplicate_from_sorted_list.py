@@ -46,6 +46,7 @@ class Sol:
                 slow.next = fast
                 slow = slow.next
             fast = fast.next
+        # Disconnect the last node from the rest of the linked list
         slow.next = None
         return head # We return head here, slow is at the last of the linked list now
     

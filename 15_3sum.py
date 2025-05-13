@@ -15,7 +15,8 @@ class Solution(object):
                 # res.append(tuplet.append(nums[i]))
                 triplet = tuplet + [nums[i]]
                 res.append(triplet)
-            
+            # Skeip the duplicate of the first number
+            # It has to be length - 1
             while i < length - 1 and nums[i] == nums[i + 1]:
                 i += 1
             i += 1
@@ -27,11 +28,16 @@ class Solution(object):
         res = []
         while lo < hi:
             _sum = nums[lo] + nums[hi]
-            left, right = nums[lo], nums[hi]
+            # We store left and right value at the start of every while loop
+            left, right = nums[lo], nums[hi] 
             if _sum < target:
+                # If the old left value is the same as the lo value
+                # The lo value is updated in every inner while loop
                 while lo < hi and left == nums[lo]:
                     lo += 1
             elif _sum > target:
+                # If the old right value is the same as the hi value
+                # The hi value is updated in every inner while loop
                 while lo < hi and right == nums[hi]:
                     hi -= 1
             else:
