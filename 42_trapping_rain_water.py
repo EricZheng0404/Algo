@@ -27,13 +27,9 @@ class Solution:
         rMax[n - 1] = height[n - 1]
 
         for i in range(1, n):
-            print("i: ", i)
-            print("lMax[i]: ", lMax[i])
-            print("lMax[i - 1]: ", lMax[i - 1])
             lMax[i] = max(height[i], lMax[i - 1])
-        print("lMax: ", lMax)
         for i in range(n - 2, -1, -1):
-            rMax[i] = max(rMax[i], rMax[i + 1])
+            rMax[i] = max(rMax[i], rMax[i + 1]) # I fucked up here, I should have used rMax[i + 1] instead of rMax[i]
         print("rMax: ", rMax)
         for i in range(1, n - 1):
             res += min(lMax[i], rMax[i]) - height[i]
