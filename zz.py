@@ -13,4 +13,7 @@ class Solution:
         while l >= 0 and r < len(s) and s[l] == s[r]:
             l -= 1
             r += 1
-        return s[l+1:r] # I fucked up in here
+        return s[l+1:r]
+    
+sol = Solution()
+print(sol.findP("baba", 1, 1))

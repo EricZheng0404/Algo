@@ -10,29 +10,17 @@ class ListNode:
 
 
 
-node0 = ListNode(0)
-node0.next = ListNode(1)
-# node0.next.next = ListNode(2)
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        prev = None
+        curr = head
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+        # the curr is None at the last iteration
+        return prev
 
-cur = node0
-while cur:
-    print(cur.val)
-    cur = cur.next
-
-def reverse(head: ListNode):
-    if head is None:
-        return None
-    cur = head
-    prev = None
-    while cur:
-        temp = cur.next
-        cur.next = prev 
-        prev = cur 
-        cur = temp 
-    return prev
-
-newHead = reverse(node0)
-cur = newHead
-while cur:
-    print(cur.val)
-    cur = cur.next
