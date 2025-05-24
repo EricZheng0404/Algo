@@ -2,7 +2,7 @@
 206. Reversed Linked List
 Given the head of a linked list, reverse the list
 """
-
+from typing import Optional
 class ListNode:
     def __init__(self, val: int, next = None):
         self.val = val
