@@ -25,8 +25,6 @@ class Solution:
                 window[c] = window.get(c, 0) + 1
                 if window[c] == need[c]:
                     valid += 1
-            print(f"window is {l} and {r}")
-            print(f"window dict is {window}")
             
             while r - l == lenP:
                 if valid == lenNeed:
@@ -37,10 +35,6 @@ class Solution:
                     if window[d] == need[d]:
                         valid -= 1
                     window[d] -= 1
-            print(f"  shrinking window {l} and {r}")
-            print(f"  shrinking dict is {window}")
-            print("\n")
-        print("We're in here")
         return res
         
 if __name__ == "__main__":
