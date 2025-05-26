@@ -26,6 +26,7 @@ class LRUCache:
             
         # If the key is not in the cache, we add it to the cache.
         else:
+            # As long as the cache is full, we always want to remove the first key.
             if len(self.cache) == self.capacity:
                 first_key = next(iter(self.cache))
                 del self.cache[first_key]
