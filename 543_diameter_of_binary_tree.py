@@ -27,4 +27,16 @@ class Solution:
         rightMax = self.maxDepth(root.right)
         length = leftMax + rightMax
         self.dia = max(self.dia, length)
-        return 1 + max(leftMax, rightMax)
+        # leftMax and rightMax are the diameter for these two subtrees.
+        # But to get to the root and get the biggest diameter for the 
+        # root, we need to the max between them + 1.
+        return 1 + max(leftMax, rightMax) # This is the max depth of the current node.
+    
+if __name__ == "__main__":
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    # root.left.left = TreeNode(4)
+    # root.left.right = TreeNode(5)
+    sol = Solution()
+    print(sol.diameterOfBinaryTree(root))
