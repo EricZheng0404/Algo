@@ -1,3 +1,5 @@
-example = [('a', 1), ('b', 2), ('c', 3)]
+from collections import Counter
 
-print(example[0][0])
+a = set([0, 1, 2, 3, 4, 5])
+b = set([3,4, 4])
+print(a - b)
