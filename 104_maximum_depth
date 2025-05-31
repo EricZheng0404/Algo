@@ -4,6 +4,19 @@ This is a binary tree problem.
 The goal is to find the maximum depth of the binary tree.
 The depth of a node is the number of edges from the node to the root.
 The maximum depth is the maximum depth of all the nodes in the tree.
+
+For example, the maximum depth of the following tree is 3:
+    3
+   / \
+  9  20
+     / \
+    15  7
+
+If a tree is empty, the maximum depth is 0.
+If a tree has only one node, the maximum depth is 1: both of its left and right
+subtrees are empty. So, the maximum depth is max(0, 0) + 1 = 1.
+If the tree has two children, and both of them are leaves, the maximum depth is 
+max(1, 1) + 1 = 2.
 """
 from typing import Optional
 
@@ -37,6 +50,9 @@ class Solution:
         if not root:
             return
         self.depth += 1 # Whenever we enter a new node, we increment the depth.
+        # The result return is okay in here or after the recursion traverse,
+        # because we are using the instance variable self.res.
+        # But not after self.depth -= 1.
         if root.left is None and root.right is None:
             self.res = max(self.res, self.depth) # If we reach a leaf node, we update the result.
         self.traverse(root.left)
@@ -56,6 +72,7 @@ class Solution2:
         rightDepth = self.maxDepth(root.right)
         # We conquer the problem by returning the max of the left and right 
         # subtrees plus 1 (the current node).
+        # Even if it's leaf node, we still need to return 1.
         return max(leftDepth, rightDepth) + 1
 
 

@@ -12,6 +12,14 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+        
+    def __eq__(self, other):
+        if not isinstance(other, TreeNode):
+            return False
+        return (self.val == other.val and 
+                self.left == other.left and 
+                self.right == other.right)
+
 class Solution:
     def __init__(self):
         self.dia = 0
@@ -20,13 +28,17 @@ class Solution:
         self.maxDepth(root)
         return self.dia
 
+    """
+    Calculate the max height of the tree, aka from the root to the deepest leaf.
+    """
     def maxDepth(self, root):
         if not root:
             return 0
         leftMax = self.maxDepth(root.left)
         rightMax = self.maxDepth(root.right)
         length = leftMax + rightMax
-        self.dia = max(self.dia, length)
+        # self.dia is how many edges between the left and right subtrees.
+        self.dia = max(self.dia, length) 
         # leftMax and rightMax are the diameter for these two subtrees.
         # But to get to the root and get the biggest diameter for the 
         # root, we need to the max between them + 1.
