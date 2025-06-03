@@ -24,7 +24,9 @@ class Solution:
 
         res = float('inf')
         for coin in coins:
-            # calculate the result of the subproblem
+            # calculate the result of the subproblem. We'll use all three kinds
+            # of coins and we'll have the min result because min is out of the
+            # for loop.
             subProblem = self.dp1(coins, amount - coin)
             # If the subproblem has no solution, we skip this coin.
             if subProblem == -1: 
@@ -77,6 +79,8 @@ class Solution:
                 # For example, when amount = 5, coins = [1, 2, 5], we're comparing
                 # dp[4] + 1, dp[3] + 1, dp[0] + 1.
                 dp[i] = min(dp[i], 1 + dp[i - coin])
+        # If the dp[amount] is still amount + 1, it means we can't make up the
+        # amount with the given coins.
         return -1 if dp[amount] == amount + 1 else dp[amount]
     
 
