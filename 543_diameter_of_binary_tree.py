@@ -36,9 +36,8 @@ class Solution:
             return 0
         leftMax = self.maxDepth(root.left)
         rightMax = self.maxDepth(root.right)
-        length = leftMax + rightMax
-        # self.dia is how many edges between the left and right subtrees.
-        self.dia = max(self.dia, length) 
+        # self.dia is how many edsges between the left and right subtrees.
+        self.dia = max(self.dia, leftMax + rightMax) 
         # leftMax and rightMax are the diameter for these two subtrees.
         # But to get to the root and get the biggest diameter for the 
         # root, we need to the max between them + 1.
