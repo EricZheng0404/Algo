@@ -41,36 +41,18 @@ class Solution:
 
 # Solution 2: Using BFS
 class Solution2:
-    def minDepth(self, root: TreeNode) -> int:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
         if root is None:
             return 0
-        q = deque()
-        q.append(root)
-        depth = 1
-
-        while q:
-            sz = len(q)
-            for _ in range(sz):
-                cur = q.popleft()
-                if cur.left is None and cur.right is None:
-                    return depth
-                if cur.left is not None:
-                    q.append(cur.left)
-                if cur.right is not None:
-                    q.append(cur.right)
-            depth += 1
-
-def maxDepth(root: TreeNode) -> int:
-    if root is None:
-        return 0
-    # Recursively calculate the maximum depth of the left and right subtrees
-    leftMax = maxDepth(root.left)
-    rightMax = maxDepth(root.right)
-    # The maximum depth of the entire tree is the
-    # maximum depth of the left and right subtrees
-    res = max(leftMax, rightMax) + 1
-
-    return res
+        leftMin = self.minDepth(root.left)
+        rightMin = self.minDepth(root.right)
+        if root.left is None and root.right is None:
+            return 1
+        if root.left is None and root.right is not None:
+            return rightMin + 1
+        if root.left is not None and root.right is None:
+            return leftMin + 1
+        return 1 + min(leftMin, rightMin)
 # root 1:
 #       1
 #     /   \
