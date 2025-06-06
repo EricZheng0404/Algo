@@ -12,15 +12,18 @@ move consists of turning one wheel one slot.
 """
 class Solution:
     def openLock(self, deadends: List[str], target: str) -> int:
-        if target in deadends:
+        # Edge case: I forgot that 0000 can be in deadends.
+        if target in deadends or "0000" in deadends:
             return -1
-        
+        # Initialize
+        deadends = set(deadends)
         start = "0000"
         visited = set()
         visited.add(start)
         q = deque()
         q.append(start)
         step = 0
+        # BFS
         while q:
             sz = len(q)
             for _ in range(sz):
@@ -29,7 +32,10 @@ class Solution:
                     # If the start (0000) is the target, we should directly return 0
                     return step
                 for change in self.possibleChange(curr):
+                    # This is when we use the deadends
                     if change not in deadends and change not in visited:
+                        if change == target:
+                            return step + 1
                         visited.add(change)
                         q.append(change)
 
@@ -39,6 +45,9 @@ class Solution:
     def possibleChange(self, curr):
         res = []
         for i in range(len(curr)):
+            # Before I wheels = list(curr) in here, and used res = wheels,
+            # I got a wrong answer. Becuase when I edit res, it will also
+            # change wheels
             res.append(self.plus(curr, i))
             res.append(self.minus(curr, i))
         return res
