@@ -12,7 +12,8 @@ class Solution(object):
         return self.res
 
     def backtrack(self, nums):
-        # The end condition: when all nums are added to self.path
+        # The end condition: when all nums are added to self.path at the end of
+        # the path.
         if len(self.path) == self.n: # I set this to self.path instead of len(self.path)
             self.res.append(self.path[:])
             return
