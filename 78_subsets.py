@@ -3,6 +3,10 @@ LeetCode 78. Subsets
 
 Question I have: I don't know how to handle the case when the length of the
 subset is 0.
+Answer: Whenever we enter a backtrack function, we add the path to the result. 
+That's actually the last path.
+
+
 """
 from typing import List
 
@@ -14,7 +18,8 @@ class Solution:
         return self.res
     
     def backtrack(self, nums, start):
-        print(f"path is {self.path}")
+        if start == 0:
+            print(f"path is {self.path}")
         #Pre-order position: we add the path as long as 
         self.res.append(list(self.path))
         for i in range(start, len(nums)):
