@@ -18,15 +18,14 @@ class Solution:
         return self.res
     
     def backtrack(self, nums, start):
-        if start == 0:
-            print(f"path is {self.path}")
         #Pre-order position: we add the path as long as 
         self.res.append(list(self.path))
-        for i in range(start, len(nums)):
+        # We use this to control branching, avoiding duplicates
+        for i in range(start, len(nums)): 
             self.path.append(nums[i])
             self.backtrack(nums, i + 1)
             self.path.pop()
 
 if __name__ == "__main__":
     sol = Solution()
-    sol.subsets([1, 2, 3])
+    print(sol.subsets([1, 2, 3]))
