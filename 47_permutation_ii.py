@@ -27,7 +27,7 @@ class Solution:
             # If visited is True, meaning it has been visited, we continue
             if self.visited[i] is True:
                 continue
-            if i != 0 and nums[i - 1] == nums[i] and not self.visited[i - 1]:
+            if i != 0 and nums[i - 1] == nums[i] and not self.visited[i]:
                 continue
             self.visited[i] = True
             self.path.append(nums[i])
