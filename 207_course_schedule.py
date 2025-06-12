@@ -29,7 +29,7 @@ All the pairs prerequisites[i] are unique.
 from typing import List
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = self.makeGraph(prerequisites)
+        graph = self.makeGraph(prerequisites, numCourses)
         self.n = numCourses
         # Keep track of all the nodes we have visited, we only change this once
         # in pre-order
@@ -37,26 +37,39 @@ class Solution:
         # Keep track of one single path
         self.path = [False] * self.n
         self.isCycle = False # We should set True or False in here?
-        for i in range(self.n):
-            self.traverse(graph, 0)
+        for i in range(numCourses):
+            self.traverse(graph, i) # Darn it! I put 0 here
         return not self.isCycle
     
     def traverse(self, graph, start):
-        if self.isCycle is True:
+        # Early termination: if we have found a cycle, there's no need to traverse
+        # the rest of the graph.
+        if self.isCycle:
             return
-        if self.visited[start]:
-            return 
+        # We should set this condition before check visited becuase we need to
+        # set isCycle to True if we find a cycle first rather than found visited
+        # and return without setting self.isCycle to True.
         if self.path[start]:
             self.isCycle = True
             return
+        if self.visited[start]:
+            return 
         # Pre-order position, this should be outside of the for loop
         self.visited[start] = True
         self.path[start] = True
-        for i in range(len(graph[start])):
-            self.traverse(graph, i + 1)
+        for to_ in graph[start]:
+            self.traverse(graph, to_)
         # Post-order position, this should be outside of the for loop
         self.path[start] = False
-        
+        return False
 
-    def makeGraph(self, prerequisites):
-        return [[] for _ in range(len(prerequisites))]
+    def makeGraph(self, prerequisites, numCourses):
+        graph = [[] for _ in range(numCourses)]
+        for edge in prerequisites:
+            from_ = edge[1]
+            to_ = edge[0]
+            graph[from_].append(to_)
+        return graph
+
+sol = Solution()
+print(sol.canFinish(2, [[1,0]]))

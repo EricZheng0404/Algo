@@ -18,9 +18,7 @@ class Solution:
         if p is None and q is None:
             return True
         # If one is None and the other is not, return False
-        if p is None and q is not None:
-            return False
-        if p is not None and q is None:
+        if p is None or q is None:
             return False
         # If the values are different, return False
         if p.val != q.val:

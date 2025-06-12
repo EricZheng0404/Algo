@@ -64,6 +64,7 @@ Solution 2: Divide and conquer. We solve the subproblems recursively.
 """
 class Solution2:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
+        # Base case: if the root is None, the depth is 0.
         if not root:
             return 0
         # We divide the problem into two subproblems: the max of the left and 
