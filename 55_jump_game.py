@@ -24,6 +24,6 @@ class Solution:
             # meaning we're stuck
             if furtheset <= i: # I was confused whther < or <=
                 return False
-        return furtheset >= n - 1
+        # Edge case: if we can't go anywhere, we return False
+        return furtheset >= n - 1 
 
-        
