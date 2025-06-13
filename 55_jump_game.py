@@ -25,3 +25,5 @@ class Solution:
             if furtheset <= i: # I was confused whther < or <=
                 return False
         return furtheset >= n - 1
+
+        
