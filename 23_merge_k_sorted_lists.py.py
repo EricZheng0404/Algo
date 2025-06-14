@@ -40,7 +40,43 @@ class Solution(object):
             p = p.next
         
         return dummy.next 
-    
+
+class Solution2:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        n = len(lists)
+        if n == 0:
+            return None
+        return self.mergeHelper(lists, 0, n - 1)
+
+    def mergeHelper(self, lists, l, r):
+        if l == r:
+            return lists[l]
+        mid = l + (r - l)//2
+        left = self.mergeHelper(lists, l, mid)
+        right = self.mergeHelper(lists, mid + 1, r)
+        return self.merge2(left, right)
+
+    def merge2(self, lst1: ListNode, lst2: ListNode()):
+        if not lst1:
+            return lst2
+        if not lst2:
+            return lst1
+        dummy = ListNode(-1)
+        p = dummy
+        while lst1 and lst2:
+            if lst1.val < lst2.val:
+                p.next = lst1
+                p = p.next
+                lst1 = lst1.next
+            else:
+                p.next = lst2
+                p = p.next
+                lst2 = lst2.next
+        if lst1:
+            p.next = lst1
+        else:
+            p.next = lst2
+        return dummy.next
 if __name__ == "__main__":
     # Create first linked list: 1 -> 4 -> 5
     list1 = ListNode(1)
