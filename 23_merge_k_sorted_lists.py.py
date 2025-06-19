@@ -41,6 +41,18 @@ class Solution(object):
         
         return dummy.next 
 
+
+"""
+This is a divide and conquer solution. We divide the lists into two halves, and
+then merge the two halves. We do this recursively until we have only one list.
+Then we merge the two lists.
+
+Time complexity: O(nlogk), because height of the tree is logk, meaning we have
+logk level of merge. All N nodes are merged at each level, so the time 
+complexity is O(nlogk).
+
+Space complexity: O(logk), because we have logk level of merge.
+"""
 class Solution2:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         n = len(lists)
