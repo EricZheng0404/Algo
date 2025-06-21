@@ -6,6 +6,14 @@ class ListNode(object):
         self.next = next
 
 class Solution(object):
+    """
+    My confusion was how to separate the cases on:
+    What if we have carry after we've done interating through p1 or p2.
+    Cases that We have carry but p1 or p2 is not done iterated.
+    
+    We should take care of this in the while loop because even if this is the case, we still need the same
+    algorithm to further calculate carry and digit
+    """
     def addTwoNumbers(self, l1, l2):
         """
         :type l1: Optional[ListNode]

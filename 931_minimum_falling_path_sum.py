@@ -9,6 +9,7 @@ Input: matrix = [[2,1,3],[6,5,4],[7,8,9]]
 Output: 13
 Explanation: There are two falling paths with a minimum sum as shown.
 """
+from typing import List
 
 class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
@@ -20,7 +21,8 @@ class Solution:
         return res
 
     def dp(self, matrix, row, col):
-        # Out of range, we just return something unreasonable
+        # This condition needs to be before row == 0 check
+        # Because row == 0 but col could be out of range.
         if row < 0 or col < 0 or row >= self.n or col >= self.n:
             return 9999 # Because this is a recursion, this has to return something.
         # If the result is in the memo
