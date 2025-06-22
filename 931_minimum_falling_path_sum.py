@@ -34,3 +34,24 @@ class Solution:
         # Get into dp
         self.memo[row][col] = min(self.dp(matrix, row - 1, col), self.dp(matrix, row - 1, col - 1), self.dp(matrix, row - 1, col + 1)) + matrix[row][col]
         return self.memo[row][col]
+
+class Solution2:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m = len(obstacleGrid)
+        n = len(obstacleGrid[0])
+        # We set up a (m + 1) * (n + 1) matrix to avoid boundary check.
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        if obstacleGrid[0][0] == 1 or obstacleGrid[m - 1][n - 1] == 1:
+            return 0
+        dp[1][1] = 1
+        for row in range(1, m + 1):
+            for col in range(1, n + 1):
+                if row == 1 and col == 1:
+                    continue
+                # I forgot to add this condition.
+                # If the current cell is an obstacle, we don't need to calculate
+                # the number of paths.
+                if obstacleGrid[row - 1][col - 1]:
+                    continue
+                dp[row][col] = dp[row - 1][col] + dp[row][col - 1]
+        return dp[m][n] 
