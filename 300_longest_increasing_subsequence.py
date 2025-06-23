@@ -24,5 +24,5 @@ class Solution:
                 if nums[j] < nums[i]:
                     # We need to find the max value of all the possible dp[i],
                     # or we could run into a [0,1,0,3] problem.
-                    dp[i] = max(dp[j] + 1, dp[i]) 
+                    dp[i] = max(dp[j] + 1, dp[i]) # I was confused on this line.
         return max(dp)
