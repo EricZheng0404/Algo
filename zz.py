@@ -1,20 +1,19 @@
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
+class ListNode:
+    def __init__(self, val=0, next=None):
         self.val = val
-        self.left = left
-        self.right = right
+        self.next = next
 
-def sumOfNodes(root):
-    if not root:
-        return 0
-    return root.val + sumOfNodes(root.left)
+def reOrder(head):
+    stk = []
+    p = head
+    while p:
+        stk.append(p)
+        p = p.next
+    print(stk)
 
-root = TreeNode(1)
-root.left = TreeNode(2)
-root.right = TreeNode(3)
-root.left.left = TreeNode(4)
-root.left.right = TreeNode(5)
-# root.right.left = TreeNode(6)
-# root.right.right = TreeNode(7)
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
 
-print(sumOfNodes(root))
+ordered_head = reOrder(head)
