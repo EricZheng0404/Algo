@@ -12,7 +12,7 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        # 1. Rotate the matrix diagonally from left to right
+        # 1. Rotate the matrix diagonally from top left to bottom right
         n = len(matrix)
         for i in range(n):
             for j in range(i, n):

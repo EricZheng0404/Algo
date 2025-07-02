@@ -34,6 +34,9 @@ class Solution2:
         i = 0
         while i < len(stringList):
             for j in range(i, len(stringList)):
+                # [j + 1] is out of bound for the last word, 
+                # so we need to check if j is the last index first
+                # If it's met, then [j + 1] won't be checked.
                 if j == len(stringList) - 1 or stringList[j + 1] == " ":
                     self.reverse(stringList, i, j)
                     i = j + 2
