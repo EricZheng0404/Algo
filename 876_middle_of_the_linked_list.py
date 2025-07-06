@@ -13,6 +13,7 @@ class Solution(object):
         """
         slow, fast = head, head
         while fast and fast.next:
+            # It need fast because in the last loop when fast is at None, there's no fast.next
             slow = slow.next
             fast = fast.next.next
 

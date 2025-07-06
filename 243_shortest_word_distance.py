@@ -1,3 +1,9 @@
+from typing import List
+
+"""
+Given an array of strings wordsDict and two different strings that already exist in the array word1 and word2, return the shortest distance between these two words in the list.
+"""
+
 class Solution:
     def shortestDistance(self, wordsDict: List[str], word1: str, word2: str) -> int:
         p1 = -1

@@ -56,8 +56,9 @@ class Solution(object):
                 pUniq.next = p
                 pUniq = pUniq.next
             p = p.next
-            pUniq.next = None
-            pDuplicate.next = None
+        # We only need to set None for the last node
+        pUniq.next = None
+        pDuplicate.next = None
         return dummyUniq.next
 
     # Implementation 3: Use two pointers
@@ -81,6 +82,8 @@ class Solution(object):
                 if q is None:
                     p.next = q
             else:
+                # If the end of the list is not duplicate, the old None would be
+                # attached
                 p.next = q
                 p = p.next
                 q = q.next
