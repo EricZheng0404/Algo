@@ -24,3 +24,12 @@ class Solution:
         # the curr is None at the last iteration
         return prev
 
+class Solution2:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        # 4 -> 5 -> None
+        last = self.reverseList(head.next) # last = 5
+        head.next.next = head # 4 -> 5 -> 4
+        head.next = None # 4 -> None
+        return last

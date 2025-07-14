@@ -14,48 +14,25 @@ def getIntersectionNode(headA, headB):
         :type head1, head1: ListNode
         :rtype: ListNode
         """
+        # I forgot about the edge case where one of the lists is empty
+        if not headA or not headB:
+            return None
         p1 = headA
         p2 = headB
-        while p1 != p2:
-            print(f"p1 is {p1.val if p1 else None}")
-            print(f"p2 is {p2.val if p2 else None}")
-            print()
+        while p1 != p2: 
             p1 = p1.next if p1 else headB
             p2 = p2.next if p2 else headA
         return p1
 
 
-# Test case where two lists intersect
-# Create the intersection node and shared portion
-intersection = ListNode(8)
-intersection.next = ListNode(4)
-intersection.next.next = ListNode(5)
-
-# Create list A: 4->1->(8->4->5)
-headA = ListNode(4)
-headA.next = ListNode(1)
-headA.next.next = intersection
-
-# Create list B: 5->6->1->(8->4->5)
-headB = ListNode(5)
-headB.next = ListNode(6)
-headB.next.next = ListNode(1)
-headB.next.next.next = intersection
-
-# Test the function
-# result = getIntersectionNode(headA, headB)
-# print(result.val)  # Should print 8
-
-
-# Test2
+# Test case where two lists are of the same length
 # a: 0 -> 1 -> 2
 a = ListNode(0)
 a.next = ListNode(1)
 a.next.next = ListNode(2)
-# b: 3 -> 4 -> 5 -> 6
+# b: 3 -> 4 -> 5
 b = ListNode(3)
 b.next = ListNode(4)
 b.next.next = ListNode(5)
-b.next.next.next = ListNode(6)
-c = getIntersectionNode(a, b)
-print(f"c is {c}")
+
+print(getIntersectionNode(a, b))

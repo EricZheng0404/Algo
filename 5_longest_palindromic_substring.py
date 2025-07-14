@@ -13,7 +13,9 @@ class Solution:
             # The case when the length of the palindrome is odd
             s1 = self.findPalindrone(s, i, i)
             # The case when the length of the palindrome is even
-            s2 = self.findPalindrone(s, i, i + 1)
+            # We don't need to check if i + 1 is out of range because we will
+            # never call findPalindrone with r out of range.
+            s2 = self.findPalindrone(s, i, i + 1) 
             res = res if len(res) > len(s1) else s1
             res = res if len(res) > len(s2) else s2
         return res
