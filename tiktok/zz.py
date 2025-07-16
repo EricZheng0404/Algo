@@ -1,32 +1,21 @@
-class ListNode:
-    def __init__(self, val=0, next=None):
+def dfs(root):
+    if not root:
+        return
+    print(root.val)
+    dfs(root.left)
+    dfs(root.right)
+
+def bfs(root):
+    if not root:
+        return
+    queue = [root]
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
-        self.next = next
-    def __repr__(self):
-        return self.val
+        self.left = left
+        self.right = right
 
-def remove_duplicates(head: ListNode) -> ListNode:
-    if not head:
-        return None  
-    
-    current = head
-    while current and current.next: 
-        if current.val == current.next.val:  
-            current.next = current.next.next  
-        current = current.next  
-    
-    return head
-
-# Example 1
-head1 = ListNode(1)
-head1.next = ListNode(1)
-head1.next.next = ListNode(2)
-head1.next.next.next = ListNode(3)
-head1.next.next.next.next = ListNode(3)
-head1.next.next.next.next.next = ListNode(3)
-
-removed = remove_duplicates(head1)
-
-while removed:
-    print(removed.val)
-    removed = removed.next
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
