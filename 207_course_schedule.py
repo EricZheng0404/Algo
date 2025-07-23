@@ -49,6 +49,8 @@ class Solution:
         # We should set this condition before check visited becuase we need to
         # set isCycle to True if we find a cycle first rather than found visited
         # and return without setting self.isCycle to True.
+        # Example: 0 -> 1 -> 0. 0 is visited already. So, if we return at 
+        # visited[0], we can never detect this cycle
         if self.path[start]:
             self.isCycle = True
             return
