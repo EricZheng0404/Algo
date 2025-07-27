@@ -13,3 +13,7 @@ def f(weights: List[int], x: int) -> int:
                 i += 1
         days += 1
     return days
+
+weights = [1,2,3,1,1]
+days = 4
+print(f(weights, 3))
