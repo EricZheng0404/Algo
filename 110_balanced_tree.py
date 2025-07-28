@@ -29,13 +29,15 @@ class Solution:
         return self.res
 
     def traverse(self, root):
-        
+
         # if self.res is False:
         #     return
         if root is None:
             return 0
         left = self.traverse(root.left)
         right = self.traverse(root.right)
+        # Post-order position: when we already know the height of the left and 
+        # right subtrees, we can check if the tree is balanced
         if abs(left - right) > 1:
             self.res = False
         return 1 + max(left, right)
