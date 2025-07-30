@@ -1,7 +1,9 @@
 class Solution:
     """
     1. Why it has to be r = len(nums) - 1?
+         
     2. Why l < r?
+
 
     """
     def findPeakElement(self, nums: List[int]) -> int:

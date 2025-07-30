@@ -14,12 +14,19 @@ class TreeNode:
         self.left = left
         self.right = right
 class Solution:
+    """
+    The root must greater than all the nodes in the left subtree and less 
+    than all the nodes in the right subtree.
+
+    
+   
+    """
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         return self.validate(root, float("-inf"), float("inf"))
     
     def validate(self, root, low, high):
         if not root:
             return True
-        if root.val <= low or root.val >= high: # Binary tree is strictly greater or less 
+        if root.val <= low or root.val >= high: 
             return False
         return self.validate(root.left, low, root.val) and self.validate(root.right, root.val, high)

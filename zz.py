@@ -1,32 +1,25 @@
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+from typing import List
+class Solution:
+    def numMatchingSubseq(self, s: str, words: List[str]) -> int:
+        res = 0
+        for word in words:
 
-def insert_into_bst(root, val):
-    # Write your code here
-    if root is None:
-        return TreeNode(val)
-    if root.left is None and val < root.val:
-        root.left = TreeNode(val)
-        return
-    if root.right is None and val > root.val:
-        root.right = TreeNode(val)
-        return
-    if val > root.val:
-        insert_into_bst(root.right, val)
-    if val < root.val:
-        insert_into_bst(root.left, val)
+            if self.subsequence(word, s):
+                print(word)
+                res += 1
+        return res
 
-root = TreeNode(4, TreeNode(2, TreeNode(1), TreeNode(3)), TreeNode(7))
-insert_into_bst(root, 5)
-
-def print_tree(root):
-    if root is None:
-        return
-    print_tree(root.left)
-    print(root.val)
-    print_tree(root.right)
-
-print_tree(root)
+    def subsequence(self, word, s):
+        i = 0
+        j = 0
+        while i < len(word) and j < len(s):
+            print(i, j)
+            if word[i] == s[j]:
+                i += 1
+                j += 1
+            else:
+                j += 1
+        return i == len(word)
+    
+sol = Solution()
+print(sol.subsequence("acd", "abcde"))
