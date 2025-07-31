@@ -6,6 +6,7 @@ class Solution:
     For example arr = [0, 1, 2, 4, 5], x = 3. In this case, p = 3 pointing to 4.
     But we should have 2 in the result.
     """
+    from typing import List
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
         pos = self.leftBound(arr, x)
         # l, r are both open-ended, handling the edge cases that l and r can be 
