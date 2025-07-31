@@ -1,25 +1,14 @@
-from typing import List
-class Solution:
-    def numMatchingSubseq(self, s: str, words: List[str]) -> int:
-        res = 0
-        for word in words:
-
-            if self.subsequence(word, s):
-                print(word)
-                res += 1
+def monotonic(nums):
+        n = len(nums)
+        res = [0] * n
+        s = [] 
+        for i in range(n - 1, -1, -1):
+            num = nums[i]
+            # We get rid of all the number that's less than the num
+            while s and s[-1] <= num:
+                s.pop()
+            res[i] = -1 if not s else s[-1]
+            s.append(num)
         return res
 
-    def subsequence(self, word, s):
-        i = 0
-        j = 0
-        while i < len(word) and j < len(s):
-            print(i, j)
-            if word[i] == s[j]:
-                i += 1
-                j += 1
-            else:
-                j += 1
-        return i == len(word)
-    
-sol = Solution()
-print(sol.subsequence("acd", "abcde"))
+print(monotonic([2, 1, 2, 4, 3]))    

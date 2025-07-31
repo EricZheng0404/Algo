@@ -1,12 +1,10 @@
 from typing import List
-
+from collections import defaultdict
 class Solution:
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
-        lookup = {}
-        for i in range(len(s)):
-            lst = lookup.get(s[i], [])
-            lst.append(i)
-            lookup[s[i]] = lst
+        lookup = defaultdict(list)
+        for i, ch in enumerate(s):
+            lookup[ch].append(i)
         res = 0
         for word in words:
             i = 0 # Pointer in the word
