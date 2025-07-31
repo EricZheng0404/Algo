@@ -25,6 +25,9 @@ class Solution:
             # we pop 73 and 74 because they are less than 72.
             while s and temperatures[s[-1]] <= temperatures[i]:
                 s.pop()
+            # The result should be the difference between the index of the 
+            # temperature that is greater than the current temperature and the 
+            # current index
             res[i] = 0 if not s else s[-1] - i
             # Instead of pushing the actual temperatures, we push the index of
             # the temperatures which is greater than the current temperature
