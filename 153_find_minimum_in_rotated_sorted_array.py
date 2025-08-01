@@ -3,29 +3,32 @@ https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/editorial
 """
 from typing import List
 class Solution:
-
     """
-    The key is to find the "inflection point", AKA the cliff.
-
-    """
+    There's only cliff in the numbers, we only need to identify it.
+    """ 
     def findMin(self, nums: List[int]) -> int:
-        # Forgot the edge case that there's only one number in nums
-        if len(nums) == 1:
+        # Base cases
+        # 1. If there's only one number
+        n = len(nums)
+        if n == 1:
             return nums[0]
-        l, r = 0, len(nums) - 1
-        # We know that the original nums is sorted or not
+        # If the list is already sorted
+        l, r = 0, n - 1
         if nums[l] < nums[r]:
             return nums[l]
         while l <= r:
             mid = l + (r - l) // 2
-            # Case [2, 3] with 3 being mid, so 2 is the inflection point
+            # [3, 2] as 2 being the middle, then 2 is the min
             if nums[mid - 1] > nums[mid]:
                 return nums[mid]
-            # Case [2, 1] with 2 being mid, so 1 is the inflection point
-            if nums[mid + 1] < nums[mid]:
+            # [2, 1] as 2 being the middle, then 1 is the min
+            if nums[mid] > nums[mid + 1]:
                 return nums[mid + 1]
-            if nums[mid] > nums[l]:
+            # If nums[mid] is greater than nums[l], that means all the numbers to the
+            # left is sorted, the min must be on the right
+            if nums[l] < nums[mid]:
                 l = mid + 1
-            else: 
+            else:
                 r = mid - 1
         return nums[l]
+                
