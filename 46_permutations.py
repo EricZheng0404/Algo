@@ -18,7 +18,7 @@ class Solution(object):
             self.res.append(self.path[:])
             return
         for i in range(self.n):
-            # We don't want any used choices
+            # We don't want any used choices. We can handle this in here
             if self.used[i] == True:
                 continue
             # Make a choice
