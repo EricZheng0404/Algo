@@ -32,7 +32,6 @@ class Solution:
             return None
         # To get the root, which is the start of the pre-order traversal
         rootVal = preorder[preStart] # I made a mistake putting 0 is here
-        print(f"{rootVal}, {preStart}, {preEnd}, {inStart}, {inEnd}")
         # Find this rootVal in in-order traversal. This index is not the number of 
         # elements in the left tree
         indexOfRootInInOrder = self.lookup[rootVal]
