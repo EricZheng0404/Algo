@@ -47,9 +47,28 @@ class Solution(object):
                 while lo < hi and right == nums[hi]:
                     hi -= 1
         return res
-
-                
-if __name__ == "__main__":
-    sol = Solution()
-    print(f"first solution: ", sol.twoSum([2, 3, 6, 7, 8], 0, 9))
-    print(f"second solution: ", sol.twoSum([2, 3, 6, 7, 8], 1, 9))
+from typing import List
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort()
+        n = len(nums)
+        for i in range(n - 2):
+            # Skip all the same number
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            j = i + 1
+            k = n - 1
+            while j < k:
+                total = nums[i] + nums[j] + nums[k]
+                if total == 0:
+                    res.append([nums[i], nums[j], nums[k]])
+                    j += 1
+                    # If there's a match, we want to move to the next unique value
+                    while j < k and nums[j] == nums[j - 1]:
+                        j += 1
+                elif total < 0:
+                    j += 1
+                else:
+                    k -= 1
+        return res
