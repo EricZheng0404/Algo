@@ -15,7 +15,7 @@ class Solution:
             # When the number is greater than 255
             if int(s[start:i + 1]) > 255:
                 continue
-            # When we have leading zeroes
+            # When we have leading zeroes 
             if len(s[start:i + 1]) >= 2 and s[start:i + 1][0] == "0":
                 continue
             # If we already have more than 4 elements in the list, we can break
