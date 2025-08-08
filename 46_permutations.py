@@ -1,3 +1,6 @@
+"""
+1. I forgot to use a used list to track the used numbers.
+"""
 class Solution(object):
     def permute(self, nums):
         """

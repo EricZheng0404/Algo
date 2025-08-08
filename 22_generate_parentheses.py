@@ -1,4 +1,11 @@
 from typing import List
+"""
+1. I forgot each single path is a string, not a list.
+2. I forgot to update path.
+3. I forgot to pop the last element when backtracking.
+4. The parameter of the backtrack function is to help us track the number of 
+left and right parentheses we can use.
+"""
 class Solution:
     """
     Ground rules:
@@ -28,7 +35,7 @@ class Solution:
         # Add left parenthesis
         self.path += "("
         self.backtracking(left - 1, right)
-        self.path = self.path[:-1]
+        self.path = self.path[:-1] 
         # Add right parenthesis
         self.path += ")"
         self.backtracking(left, right - 1)
