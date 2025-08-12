@@ -2,6 +2,9 @@ import collections
 import heapq
 
 """
+Given a string s, rearrange the characters of s so that any two adjacent 
+characters are not the same.
+
 Mistakes:
 1. I forgot to use the condition if currFreq + 1 != 0, we don't need to push 
 the element back to the heap.

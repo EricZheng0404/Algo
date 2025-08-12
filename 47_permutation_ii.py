@@ -1,8 +1,5 @@
 """
-LeetCode 47
 
-Given a collection of numbers nums, that might contain duplicates, return all
-possible permutations in any order
 """
 from typing import List
 class Solution:
@@ -16,10 +13,6 @@ class Solution:
         return self.res
 
     def backtrack(self, nums):
-        print(self.path)
-        print(self.visited)
-        print()
-
         if len(self.path) == self.n:
             self.res.append(self.path[:])
             
