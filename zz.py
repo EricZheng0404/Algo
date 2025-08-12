@@ -1,18 +1,39 @@
-class Solution:
-    def combination(self, nums, k):
-        self.res = []
-        self.path = []
-        self.backtrack(nums, k, 0)
-        return self.res
-    
-    def backtrack(self, nums, k, start):
-        if len(self.path) == k:
-            self.res.append(self.path[:])
-            return 
-        for i in range(start, len(nums)):
-            self.path.append(nums[i])
-            self.backtrack(nums, k, i + 1)
-            self.path.pop()
+#!/bin/python3
 
-sol = Solution()
-print(sol.combination([1, 2, 3, 4], 2))
+import math
+import os
+import random
+import re
+import sys
+import ast
+
+
+def has_cycle(adj_matrix):
+    # Write your code here
+    # The number of nodes
+    n = len(adj_matrix)
+    visited = [False] * n
+    for i in range(n):
+        if visited[i]:
+            return False
+        visited[i] = True
+        traverse(adj_matrix, visited, i)
+    return True
+
+def traverse(adj_matrix, visited, start):
+    for i in range(len(adj_matrix)):
+        if visited[i]:
+            return False
+        if adj_matrix[start][i] == 1:
+            visited[i] = True
+            traverse(adj_matrix, visited, i)
+
+adj_matrix = [
+    [0, 1, 1, 0, 0],
+    [1, 0, 1, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1],
+    [0, 0, 0, 1, 0]
+]
+
+print(has_cycle(adj_matrix))
