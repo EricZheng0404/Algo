@@ -23,6 +23,8 @@ class Solution:
                     rowNum[i] += 1
                     colNum[j] += 1
         res = 0
+        # If there're other servers on the same row or column, we can directly
+        # add to the result
         for i in range(m):
             for j in range(n):
                 if grid[i][j] == 1 and (rowNum[i] > 1 or colNum[j] > 1):

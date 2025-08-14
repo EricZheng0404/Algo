@@ -29,7 +29,3 @@ class Solution:
             if i == 4:
                 print(f"path is {self.path}")
             self.path.pop()
-
-if __name__ == "__main__":
-    sol = Solution()
-    sol.combine(4, 2)
