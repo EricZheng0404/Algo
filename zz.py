@@ -1,39 +1,40 @@
-#!/bin/python3
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.children = []
 
-import math
-import os
-import random
-import re
-import sys
-import ast
+    def add_child(self, child):
+        self.children.append(child)
+    
+    def __str__(self):
+        return f"Node({self.val})"
 
+def backtrack(root):
+    if root is None:
+        return
 
-def has_cycle(adj_matrix):
-    # Write your code here
-    # The number of nodes
-    n = len(adj_matrix)
-    visited = [False] * n
-    for i in range(n):
-        if visited[i]:
-            return False
-        visited[i] = True
-        traverse(adj_matrix, visited, i)
-    return True
+    for child in root.children:
+        # Make a choice
+        print(f"I make a choice on the edge between {root} and {child}")
 
-def traverse(adj_matrix, visited, start):
-    for i in range(len(adj_matrix)):
-        if visited[i]:
-            return False
-        if adj_matrix[start][i] == 1:
-            visited[i] = True
-            traverse(adj_matrix, visited, i)
+        backtrack(child)
 
-adj_matrix = [
-    [0, 1, 1, 0, 0],
-    [1, 0, 1, 0, 0],
-    [0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 1],
-    [0, 0, 0, 1, 0]
-]
+        # Undo the choice
+        print(f"I undo the choice on the edge between {root} and {child}")
+def dfs(root):
+    if root is None:
+        return
+    
+    # Make a choice
+    print(f"I make a choice at node {root}")
 
-print(has_cycle(adj_matrix))
+    for child in root.children:
+        dfs(child)
+
+    # Undo the choice
+    print(f"I undo the choice at node {root}")
+root = Node(1)
+root.children = [Node(2), Node(3)]
+root.children[0].children = [Node(4), Node(5)]
+# backtrack(root)
+dfs(root)
