@@ -22,7 +22,7 @@ class Solution:
         self.traverse(root.right)
 
 class Solution2:
-    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+    def connect(self, root):
         if not root:
             return root
         self.traverse(root.left, root.right)
