@@ -1,3 +1,8 @@
+"""
+79. Word Search
+Because we're looking for a whole word, so we need the whole branch, so this
+is a backtracking problem.
+"""
 from typing import List
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
@@ -7,6 +12,7 @@ class Solution:
         for i in range(self.m):
             for j in range(self.n):
                 self.dfs(board, word, i, j, 0)
+                # If we've found the word, we can return immediately
                 if self.res:
                     return True
         return False
