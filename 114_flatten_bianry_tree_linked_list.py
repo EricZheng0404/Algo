@@ -1,6 +1,9 @@
 from typing import Optional
 """
 114. Flatten Binary Tree to Linked List
+
+When we want to attach the original right branch to the end of the left branch,
+we need to traverse the left branch to the end first. 
 """
 # Definition for a binary tree node.
 class TreeNode:
