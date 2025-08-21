@@ -33,3 +33,5 @@ class Solution:
         self.memo[curr] += 1
         return curr
         
+class Solution2:
+    pass
