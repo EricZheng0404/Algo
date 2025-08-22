@@ -10,6 +10,7 @@ class Solution:
     def numDistinctIslands(self, grid: List[List[int]]) -> int:
         self.m = len(grid)
         self.n = len(grid[0])
+        # Where we store the serialized island
         res = set()
         for row in range(self.m):
             for col in range(self.n):
@@ -34,4 +35,7 @@ class Solution:
         self.dfs(grid, row - 1, col, island, 2)
         self.dfs(grid, row, col + 1, island, 3)
         self.dfs(grid, row, col - 1, island, 4)
+        # It's also necessary to add the direction we're going back to the island
+        # For example, down right, undo right, undo down is different from 
+        # down, undo down, right, undo right
         island.append(str(-dir))

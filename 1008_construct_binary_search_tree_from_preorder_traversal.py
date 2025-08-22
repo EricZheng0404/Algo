@@ -21,6 +21,8 @@ class Solution:
         # When doing traversal, always check the boundary first
         while leftIndex < len(preorder) and preorder[leftIndex] < rootVal:
             leftIndex += 1
+        # We know at last leftIndex is the index of the first element that's 
+        # greater than the root value
         root.left = self.bstFromPreorder(preorder[1:leftIndex])
         root.right = self.bstFromPreorder(preorder[leftIndex:])
         return root
