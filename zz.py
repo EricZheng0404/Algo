@@ -1,19 +1,21 @@
 from typing import List
-class Solution:
-    def generateBinaryNumbers(self, n: int) -> List[str]:
-        self.res = []
-        self.path = ""
-        self.backtrack(n)
-        return self.res
-    
-    def backtrack(self, n):
-        print(f"path is {self.path}")
-        if len(self.path) == n:
-            self.res.append(self.path[:])
-            return
-        for i in range(2):
-            self.path += str(i)
-            self.backtrack(n)
-            self.path = self.path[:-1]
+def calc_drone_min_energy(route: List[List[int]]) -> int:
+    n = len(route)
+    fuel = 0
+    res = 0
+    for i in range(1, n):
+        # Positive means a gain, negative means a loss
+        usage = route[i - 1][2] - route[i][2]
+        fuel += usage 
+        if fuel < 0:
+            res = max(res, -fuel)
+    print(res)
+    return res
 
-print(Solution().generateBinaryNumbers(3))
+route = [ [0,   2, 10],
+                  [3,   5,  0],
+                  [9,  20,  6],
+                  [10, 12, 15],
+                  [10, 10,  8] ]
+
+print(calc_drone_min_energy(route))
