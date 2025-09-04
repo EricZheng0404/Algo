@@ -7,13 +7,7 @@ class Solution:
         n = len(s)
         if n == 1:
             return s
-        i, j = 0, n - 1
-        # We want to continue finding words as long as the start index is
-        # within the string
-        while i < j:
-            s[i], s[j] = s[j], s[i]
-            i += 1
-            j -= 1
+        self.reverse(s, 0, n - 1)
         l, r = 0, 0
         while l < n: 
             while r < n and s[r] != " ":
