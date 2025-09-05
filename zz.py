@@ -1,2 +1,2 @@
-s = " "
-print(s.isalpha())
+s = " hello    world "
+print(s.strip().split())
