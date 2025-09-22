@@ -22,22 +22,43 @@ class Solution(object):
             p = p.next
         return result == result[::-1]
     
-class Solution2:
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        if head.next is None:
-            return True
-        self.left = head
-        self.res = True
-        self.traverse(head)
-        return self.res
-    
-    def traverse(self, right):
-        if right is None:
-            return
-        self.traverse(right.next)
-        # Post-order position checking
-        if right.val != self.left.val:
-            self.res = False
-        # There's no need to worry about left.next would be None
-        # Because we only will recurse the length of the list
-        self.left = self.left.next
+        # Odd: 1 -> 2 -> 1 -> None
+        # Even: 1 -> 2 -> 2 -> 1 -> None
+        slow = head
+        fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        # We want slow to be at the start of the right half.
+        # So, we have odd number of elements, slow needs to be pushed one step more
+        if fast:
+            slow = slow.next
+        left = head
+        right = self.reverse(slow)
+        while right:
+            if left.val != right.val:
+                return False
+            left = left.next
+            right = right.next
+        return True
+
+    def reverse(self, head):
+        if not head or not head.next:
+            return head
+        prev = None
+        curr = head
+        while curr:
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+            
+        return prev
+
