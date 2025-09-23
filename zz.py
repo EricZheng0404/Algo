@@ -1,20 +1,17 @@
-from typing import List
-def knapsack(W: int, wt: List[int], val: List[int]) -> int:
-    N = len(wt)
-    # base case has been initialized
-    dp = [[0] * (W + 1) for _ in range(N + 1)]
-    for i in range(1, N + 1):
-        for w in range(1, W + 1):
-            if w - wt[i-1] < 0:
-                # in this case, we can only choose not to put it in the backpack
-                dp[i][w] = dp[i - 1][w]
-            else:
-                # choose the best option between putting it in the backpack or not
-                dp[i][w] = max(
-                    dp[i - 1][w - wt[i-1]] + val[i-1], 
-                    dp[i - 1][w]
-                )
-    print(dp)
-    return dp[N][W]
+intervals = [[1,2], [1,2], [3,8], [4,5], [6,7]]
 
-print(knapsack(4, [2, 1, 3], [4, 2, 4]))
+events = []
+for s, e in intervals:
+    events.append((s, 1))   # start
+    events.append((e, -1))  # end
+
+# Sort by time, and if same time: process end (-1) before start (+1)
+events.sort(key=lambda x: (x[0], x[1]))
+
+curr = 0
+max_overlap = 0
+for _, delta in events:
+    curr += delta
+    max_overlap = max(max_overlap, curr)
+
+print(max_overlap)  # Output: 3
