@@ -27,11 +27,21 @@ class Solution:
 
 if __name__ == "__main__":
     root = TreeNode(3)
+    subRoot = TreeNode(4)
     root.left = TreeNode(4)
     root.right = TreeNode(5)
     root.left.left = TreeNode(1)
     root.left.right = TreeNode(2)
+    subRoot.left = TreeNode(1)
+    subRoot.right = TreeNode(2)
+    print(Solution().isSubtree(root, subRoot))
+
+    root = TreeNode(3)
     subRoot = TreeNode(4)
+    root.left = TreeNode(4)
+    root.right = TreeNode(5)
+    root.left.left = TreeNode(1)
+    root.left.right = TreeNode(2)
     subRoot.left = TreeNode(1)
     subRoot.right = TreeNode(2)
     print(Solution().isSubtree(root, subRoot))
