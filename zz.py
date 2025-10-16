@@ -1,2 +1,1 @@
-s = "123"
-print(s[0:1])
+print([[num] for num in range(10)])
