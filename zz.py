@@ -1,2 +1,2 @@
-for i in range(-1, -3):
-    print(i)
+s = "5."
+print(s.split("5"))
